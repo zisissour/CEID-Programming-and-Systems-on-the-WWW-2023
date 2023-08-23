@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="profile_admin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="profile_admin.js" async="async"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <title>Πράθυρο διαχειριστή</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+          </div>
+      <ul class="nav navbar-nav">
+            <li id="products"><a href="#" onclick="createProductsWindow()">Προϊόντα</a></li>
+            <li id="stores"><a href="#" onclick="createStoresWindow()">Καταστήματα</a></li>
+            <li id="discount-graphs"><a href="#" onclick="createDiscountPage()">Πλήθος προσφoρών</a></li>
+            <li id="sale-graphs"><a href="#" onclick="createAvgDiscPage()">Μέση Έκπτωση</a></li>
+            <li id="leaderboard" onclick="createLeaderboardWindow(1)"><a href="#">Leaderboard</a></li>
+            <li id="logout"><a href="/logout" id="logout-btn">Logout</a></li>
+      </ul>
+        </div>
+      </nav>
+      <div class="info">
+      </div>
+</body>
+</html>

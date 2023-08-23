@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@3.0.2/dist/leaflet-search.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="main.css">
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.2/leaflet-search.min.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script type="application/x-javascript" src="maps_admin.js" async="async"></script>
+    <script type="application/x-javascript" src="menu.js" async="async"></script>
+    <title>Main</title>
+</head>
+<body>
+    <div class="grid-container">
+        <h1 id="page_title">E-Καταναλωτής Reloaded</h1>
+        <div id="catmenu"><select name="categories" id="categoriesSelect" onchange="addMarkersByCategory(this.value)"> 
+            <option value="">Κατηγορίες</option>
+        </select>  </div>
+        <div id="mapid"></div>
+        <div id="profile"><a href="profile"><img id="profile_image" src="https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png"></a></div>
+        
+    </div>
+</body>
+</html>

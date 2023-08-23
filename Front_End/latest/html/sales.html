@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/sales.css">
+    <script type="text/javascript" src="/sales.js" async="async"></script>
+    <title>Υποβολή προσφοράς</title>
+</head>
+<body>
+    <div id="grid-container">
+        <h1 id="title">Υποβολή προσφοράς</h1>
+        <div id="search">
+            <div id="cat_sel">
+                <select id="cat_list"  onchange="makeSubcatMenu(this.value)">
+                    <option value="">Κατηγορίες</option>
+                </select>
+            </div>
+            <div id="subcat_sel">
+                <select id="subcat_list" onchange="makeProductsMenu(this.value)">
+                    <option value="">Υποκατηγορίες</option>
+                </select>
+            </div>
+            <div id="prod_sel">
+                <select id="prod_list" onchange="productClickHandler(this.value)">
+                    <option value="">Προϊόντα</option>
+                </select>
+            </div>
+            <div id="search-box">
+                <input type="text" id="autocomplete-box" name="" value="" onkeyup="getProductSugg(this.value)">
+            </div>
+            <div id="select-btn-container">
+                <input type="button" id="select-btn" value="Επιλογή προϊόντος" onclick="showForm()">
+            </div>
+        </div>
+        <div id="sale-form-container">
+            <span id="product-name"></span>
+            <div id="image-container">
+                <img id="product-image" src="market_icon.png">
+            </div>
+            <form id="sale-form" >
+                <input id="price" name="price" type="number" step="any" placeholder="Τιμή Προσφοράς" required>
+                <input id="product-id" name="product_id" type="hidden">
+                <input id="shop-id" name="shop_id" type="hidden">
+                <input id="submit-btn" price="price" type="submit" value="Υποβολή">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
