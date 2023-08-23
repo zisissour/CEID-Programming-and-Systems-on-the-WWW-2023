@@ -1,2 +1,2 @@
-# CEID-Programming-and-Systems-on-the-WWW
-Repository for the semester project of the Programming and Systems on the World Wide Web class at CEID, University of Patras.
+# CEID-Programming-and-Systems-on-the-WWW-2023
+Repository for the "Programming and Systems on the World Wide Web" semester project at CEID, University of Patras.
