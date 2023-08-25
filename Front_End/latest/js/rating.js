@@ -3,6 +3,7 @@ async function salesList(id){
   let data = await response.json(); 
   displaySalesList(data);
   disableRating();
+  disableRatings(data);
  }
  
  function displaySalesList(data)
@@ -15,6 +16,7 @@ async function salesList(id){
      sale.setAttribute('class','container');
      sale.setAttribute('id','sale');
      const dataName = data[i].name;
+     const dataImg = data[i].image;
      const dataPrice = data[i].price;
      const dataLikes = data[i].likes;
      const dataDislikes = data[i].dislikes;
@@ -49,7 +51,7 @@ async function salesList(id){
      image.setAttribute('id', 'product-image' );
      imageDiv.setAttribute('id' ,'img-div-'+ data[i].sale_id);
      imageDiv.setAttribute('class','img-div');
-     image.setAttribute('src', 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png');
+     image.setAttribute('src', dataImg);
      link.appendChild(image);
      imageDiv.appendChild(link);
      
@@ -224,6 +226,25 @@ async function salesList(id){
      }
     }
   }
+
+  async function disableRatings(data)
+  {
+    if(data.length > 0)
+    {
+     for(let i = 0; i < data.length; i++)
+     {
+      if(data[i].in_stock === 'no')
+      {
+        let likebutton = document.getElementById("likeBtn-"+ data[i].sale_id );
+        let dislbutton = document.getElementById("dislikeBtn-"+ data[i].sale_id );
+        dislbutton.disabled = true;
+        likebutton.disabled = true;
+      }
+     }
+    }
+
+  }
+
   
   const urlParams = new URLSearchParams(window.location.search);
   const shopId = urlParams.get('key');
