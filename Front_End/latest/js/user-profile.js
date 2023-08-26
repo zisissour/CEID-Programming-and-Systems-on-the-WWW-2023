@@ -82,6 +82,10 @@ function displayUserData(data)
     lmtokensP.innerHTML = "Tokens προηγούμενου μήνα: " +lmtokens;
     const div = document.createElement('div');
     div.id = 'scores';
+    const logBtn = document.createElement('button');
+    logBtn.innerHTML = "Αποσύνδεση";
+    logBtn.setAttribute('id', 'logout-Btn');
+    logBtn.setAttribute('onclick','window.location.href="/logout"'); 
     
     div.appendChild(scoreP);
     div.appendChild(totScoreP);
@@ -89,6 +93,7 @@ function displayUserData(data)
     div.appendChild(lmtokensP);
     passwrdForm.appendChild(input3);
     passwrdForm.appendChild(input4);
+    userInfo.appendChild(logBtn);
     userInfo.appendChild(imageDiv);
     userInfo.appendChild(usernameP);
     userInfo.appendChild(emailP);

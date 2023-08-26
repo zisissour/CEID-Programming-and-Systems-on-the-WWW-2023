@@ -26,8 +26,6 @@ async function salesList(id){
      const dataUsername = data[i].username;
      const dataTotScore = data[i].total_score;
      const dataDate = data[i].upl_date;
-     //const hiddenDiv = document.createElement('div');
-     //hiddenDiv.setAttribute('id', 'hiddenDiv');
      const link = document.createElement('a');
      const image =document.createElement('img');
      const imageDiv = document.createElement('div');
@@ -68,7 +66,7 @@ async function salesList(id){
      const priceSpan = document.createElement('p');
      priceSpan.innerHTML = 'Τιμή: ' + dataPrice;
      priceSpan.setAttribute('id','sale-price'); 
-     const span = document.createElement('span');
+     const span = document.createElement('div');
      span.setAttribute('id','likes-dislikes');
      const likesSpan = document.createElement('span');
      likesSpan.innerHTML = '&#128077; ' + dataLikes;
@@ -117,29 +115,20 @@ async function salesList(id){
      dislikeBtn.setAttribute('class','dislikeBtn');
      dislikeBtn.setAttribute('onclick', 'disliked(' +data[i].sale_id+ ')');
      dislikeBtn.innerHTML = "&#128078;"; 
-     //hiddenDiv.appendChild(imageDiv);
-     //hiddenDiv.appendChild(likeBtn);
-     //hiddenDiv.appendChild(space);
-     //hiddenDiv.appendChild(dislikeBtn); 
-     //hiddenDiv.appendChild(stockSelect);
+     const popUps = document.createElement('div');
+     popUps.setAttribute('class', 'popUps-grid');
      sale.appendChild(divBorder);
-     //sale.appendChild(usernameSpan);
-     //sale.appendChild(nameSpan);
-     //sale.appendChild(priceSpan);
-     //sale.appendChild(dateP);
-     //sale.appendChild(span);
-     sale.appendChild(stockSpan);
-     sale.appendChild(dlSpan);
-     sale.appendChild(wlSpan);
-     sale.appendChild(linkForMore);
-     //sale.appendChild(hiddenDiv);
+     popUps.appendChild(stockSpan);
+     popUps.appendChild(dlSpan);
+     popUps.appendChild(wlSpan);
+     popUps.appendChild(linkForMore);
+     sale.appendChild(popUps);
      sale.appendChild(imageDiv);
      sale.appendChild(likeBtn);
      sale.appendChild(dislikeBtn); 
      sale.appendChild(stockSelect);
      salesDiv.appendChild(sale);
-     //salesDiv.appendChild(link);
- 
+
     }
  
   }
