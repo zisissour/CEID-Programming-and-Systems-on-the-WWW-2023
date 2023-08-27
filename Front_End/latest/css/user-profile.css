@@ -20,25 +20,26 @@ caption {
     display: grid;
     grid-template-columns: auto;
     grid-row-gap: 3em;
-    padding-left: 10em;
+    place-items: center;
 }
 
 .container{
     display: grid;
-    grid-template-columns: 45% 20% 20% auto;
-    grid-template-rows: 50px 70px repeat(3, 50px);
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: repeat(6, auto);
  
     
 }
 
 .tbl-container{
     display: grid;
-    grid-template-columns: 45% 20% 20% auto;
-    grid-template-rows: repeat(5,auto);
+    grid-template-columns: auto;
+    grid-template-rows: auto;
 
 }
 
 .responsive-table{
+  grid-row: 1;
   width: 100%;
   margin-bottom: 1.5em;
   border-spacing: 0;
@@ -48,60 +49,82 @@ caption {
   
 }
 
+.img-div{
+    grid-column: 1;
+    grid-row: 1;
+}
+
 
 #username
 { 
-    grid-row: 2/3;
-    grid-column: 1/2;
+    grid-row: 1;
+    grid-column: 1;
     color:#AEDC01;
     font-family:'Arial';
     font-size: 14px;
-    padding-left: 9em;
+    padding-left: 35%;
+    padding-top: 2em;
+    
+   
 
 }
 
 #email{
-    grid-row: 2/3;
-    grid-column: 1/2;
+    grid-row: 1;
+    grid-column: 1;
     color: white;
     font-family:'Arial';
     font-size: 14px;
-    padding-left: 9em;
-    padding-top: 2em;
+    padding-top: 4em;
+    padding-left: 35%;
+    
     
 }
 
 #logout-Btn{
-    grid-row: 2/3;
-    grid-column: 1;
-    width: 20%;
-    height : 35%;
-    margin-left: 25em;
-    margin-top: 0.5em;
+    grid-row: 4/5;
+    grid-column: 2;
+    width: 50%;
+    height : 100%;
+    color: black;
+    cursor: pointer;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-left: 2em;
     box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
 }
 
 #usernameForm{
-    grid-row: 4/5;
-    padding-left: 2em;
+    grid-row: 2/4;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-right: 2.5em;
 
 }
 
 #passwrdForm{
-    grid-row: 5/6;
-    padding-left: 2em;
+    grid-row: 4/6;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-right: 2.5em;
 }
 
 #profile-image{
     height: 5.5em;
-    padding-left: 2em;
     padding-top: 2em;
 }
 
 #scores{
-    grid-row: 2;
+    grid-column: 2;
+    grid-row: 1/6;
     color: white;
     font-size: 14px;
+    padding-top: 2em;
+    padding-left: 2em;
 }
 
 #page-title{
@@ -112,6 +135,34 @@ caption {
     background-color:#5ADB62;
     padding: 0.7em;
     margin: 0em;
+}
+
+@media(max-width:500px){
+
+    .container{
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        grid-template-rows: repeat(10, auto);
+     
+        
+    }
+
+    #scores{
+        grid-column: 1;
+        grid-row: 6/9;
+        padding-top: 2em;
+        padding-left: 2em;
+    }
+
+    #logout-Btn{
+        grid-column: 1;
+        grid-row: 10;
+        height : 90%;
+        margin-top: 1em;
+        margin-left: 2em;
+        
+    }
+
 }
 
 

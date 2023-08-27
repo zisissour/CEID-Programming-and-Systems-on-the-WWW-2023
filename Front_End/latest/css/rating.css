@@ -16,7 +16,6 @@ button {
   font-size: small;
   letter-spacing: 2px;
   text-decoration: none;
-  text-transform: uppercase;
   color: black;
   cursor: pointer;
   border: 3px solid;
@@ -434,7 +433,7 @@ border-radius: 0.3em;
 
 }
 
-@media(max-width:700px){
+@media(max-width:700px){ /*Smaller screens*/
 
 
     .img-div{
@@ -462,4 +461,22 @@ border-radius: 0.3em;
     }
 
 }
+
+@media(max-width:440px) /*mobile screens*/
+{
+    .likeBtn{
+        margin-left: 70%;
+    }
+    
+    .dislikeBtn{
+        margin-left: 70%;
+    }
+
+    .stock-select{
+    margin-left: 70%;
+    }
+
+}
+
+
 
