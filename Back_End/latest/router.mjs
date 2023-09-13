@@ -16,18 +16,21 @@ router.get('/', (req, res) => {
 });
 
 router.get('/stores/getStoresData', async function(req, res){
-
-   res.send(await getStoresData());
+    res.setHeader('Cache-Control', 'no-cache');
+    res.send(await getStoresData());
 
 });
 
 router.get('/stores/getSalesData:id', async function(req, res){
     const id = req.params.id;
+    res.setHeader('Cache-Control', 'no-store');
     res.send(await getSalesData(id));
 
 });
 
 router.get('/main.html',checkAuth, (req, res) => {
+
+    res.setHeader('Cache-Control', 'no-cache');
     if(req.session.username.type === 'admin')
         res.sendFile(path.join(path.resolve(path.dirname('')) + '../../../Front_End/latest/html/main_admin.html'));
     else
@@ -35,32 +38,34 @@ router.get('/main.html',checkAuth, (req, res) => {
 });
 
 router.get('/profile', checkAuth, (req, res) => {
-    if(req.session.username.type === 'admin')
-        res.sendFile(path.join(path.resolve(path.dirname('')) + '../../../Front_End/latest/html/profile_admin.html'));
-    else
-        res.sendFile(path.join(path.resolve(path.dirname('')) + '../../../Front_End/latest/html/user-profile.html'));
+    res.setHeader('Cache-Control', 'no-cache');
+    if(req.session.username.type === 'admin'){
+        res.sendFile(path.join(path.resolve(path.dirname('')) + '../../../Front_End/latest/html/profile_admin.html'));}
+    else{
+        res.sendFile(path.join(path.resolve(path.dirname('')) + '../../../Front_End/latest/html/user-profile.html'));}
 
 })
 
 router.get('/menu', async function(req, res) {
-  
-    
+    res.setHeader('Cache-Control', 'max-age=604800');
     res.send(await getCategoriesMenu());
  
 });
 
 router.get('/menu/subcat', async function(req, res) {
     const id = req.query.id;
-    if(req.query.id)
-        res.send(await getSubcategoriesMenu(id));
+    if(req.query.id){
+        res.setHeader('Cache-Control', 'max-age=604800');
+        res.send(await getSubcategoriesMenu(id));}
     else
         res.send({});
 });
 
 router.get('/menu/products', async function(req, res) {
     const id = req.query.id;
-    if(req.query.id)
-        res.send(await getProductsMenu(id));
+    if(req.query.id){
+        res.setHeader('Cache-Control', 'max-age=604800');
+        res.send(await getProductsMenu(id));}
     else
         res.send({});
 });
@@ -69,6 +74,7 @@ router.get('/menu/product', async function(req, res) {
 
     if(req.query.starts_with){
         const text = req.query.starts_with;
+        res.setHeader('Cache-Control', 'max-age=604800');
         res.send(await getProductSuggestions(text));
     }
     else
@@ -77,6 +83,7 @@ router.get('/menu/product', async function(req, res) {
 
 router.get('/menu/getShopsByCategory:id', async function(req,res)
 {
+    res.setHeader('Cache-Control', 'max-age=604800');
     const id = req.params.id;
     res.send(await getShopsByCategory(id));
 
@@ -84,12 +91,13 @@ router.get('/menu/getShopsByCategory:id', async function(req,res)
 
 router.get('/rating',checkAuth, async function(req,res)
 {
-
+    res.setHeader('Cache-Control', 'max-age=2678400');
     res.sendFile(path.join(path.resolve(path.dirname(''))+ '../../../Front_End/latest/html/rating.html'));
     
 });
 
 router.get('/sales', checkAuth, async function(req, res){
+    res.setHeader('Cache-Control', 'max-age=2678400');
     res.sendFile(path.join(path.resolve(path.dirname('')) + '../../../Front_End/latest/html/sales.html'));
 });
 
@@ -102,7 +110,7 @@ router.get('/deleteSale', checkAuth, async function(req, res){
 router.get('/admin/insertShops', checkAuth, async function(req, res){
     if(req.session.username.type === "admin"){
         const success = await insertStoreData();
-
+        res.setHeader('Cache-Control', 'no-store');
         res.send({
             success: success
         });
@@ -112,7 +120,7 @@ router.get('/admin/insertShops', checkAuth, async function(req, res){
 router.get('/admin/deleteShops', checkAuth, async function(req,res){
     if(req.session.username.type === "admin"){
         const success = await deleteStoreData();
-
+        res.setHeader('Cache-Control', 'no-store');
         res.send({
             success: success
         });
@@ -122,7 +130,7 @@ router.get('/admin/deleteShops', checkAuth, async function(req,res){
 router.get('/admin/insertProducts', checkAuth, async function(req, res) {
     if(req.session.username.type === "admin"){
         const success = await insertProducts();
-
+        res.setHeader('Cache-Control', 'no-store');
         res.send({ 
             success: success
         });
@@ -132,7 +140,7 @@ router.get('/admin/insertProducts', checkAuth, async function(req, res) {
 router.get('/admin/deleteProducts', checkAuth, async function(req, res) {
     if(req.session.username.type === "admin"){
         const success = await deleteProductsData();
-
+        res.setHeader('Cache-Control', 'no-store');
         res.send({ 
             success: success
         });
@@ -141,17 +149,20 @@ router.get('/admin/deleteProducts', checkAuth, async function(req, res) {
 
 router.get('/admin/usersData', checkAuth, async function (req, res){
     if(req.session.username.type === "admin"){
+        res.setHeader('Cache-Control', 'no-cache');
         const data = await getUsersData();
         res.send(data);
     }
 });
 
 router.get('/admin/saleYears', checkAuth, async function (req, res){
+        res.setHeader('Cache-Control', 'no-cache');
         res.send(await getSaleYears());
 });
 
 router.get('/admin/getSaleCount', checkAuth, async function (req, res) {
     if(req.session.username.type === 'admin') {
+        res.setHeader('Cache-Control', 'no-store');
         res.send( await getSalesCount(req.query.year, req.query.month));
         
     }
@@ -159,6 +170,7 @@ router.get('/admin/getSaleCount', checkAuth, async function (req, res) {
 
 router.get('/admin/getAvgDiscount', checkAuth, async function(req, res){
     if(req.session.username.type === 'admin') {
+        res.setHeader('Cache-Control', 'no-store');
         res.send(await getAvgDiscount(req.query.cat_id, req.query.subcat_id, req.query.date));
     }
 });
@@ -211,6 +223,7 @@ router.get('/logout', async (req, res) => {
 router.post('/addSale', checkAuth, async function (req, res) {
     const {product_id, price, shop_id} = req.body;
     const result = await addSale(product_id, req.session.username.user_id, shop_id, price);
+    res.setHeader('Cache-Control', 'no-store');
     res.send(result);
 });
 
@@ -244,12 +257,14 @@ router.post('/outOfStock:id', async function(req, res)
 
 router.get('/getRatings', async function(req, res)
 {
+    res.setHeader('Cache-Control', 'no-store');
     res.send(await ratings(req.session.username.user_id)) 
     console.log(req.session.username.user_id);
 });
 
 router.get('/userProfile', async function(req, res)
 {
+    res.setHeader('Cache-Control', 'max-age=2678400');
    // res.sendFile(path.join(process.env.DIRNAME + '../../../Front_End/latest/html/user-profile.html'));
     res.sendFile(path.join(path.resolve(path.dirname(''))+ '../../../Front_End/latest/html/user-profile.html'));
     
@@ -258,11 +273,10 @@ router.get('/userProfile', async function(req, res)
 
 router.get('/getUserData', async function(req, res)
 {
-    console.log(req.session.username.user_id);
+
+    res.setHeader('Cache-Control', 'no-cache');
     res.send(await getUserData(req.session.username.user_id));
     
-   
- 
 }
 );
 
@@ -289,12 +303,14 @@ router.post('/changePassword', async (req, res) =>{
 
 router.get('/getSalesHistory', async function(req, res)
 {
+    res.setHeader('Cache-Control', 'no-cache');
     res.send(await getSalesHistory(req.session.username.user_id));
 }
 );
 
 router.get('/getRatingHistory', async function(req, res)
 {
+    res.setHeader('Cache-Control', 'no-store');
     res.send(await getRatingHistory(req.session.username.user_id));
 }
 );
