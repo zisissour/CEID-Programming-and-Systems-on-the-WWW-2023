@@ -21,8 +21,8 @@ async function salesList(id){
      const dataLikes = data[i].likes;
      const dataDislikes = data[i].dislikes;
      const dataStock = data[i].in_stock;
-     const dataDLower= data[i].DailyLower;
-     const dataWLower= data[i].WeeklyLower;
+     const dataDLower= data[i].prop1;
+     const dataWLower= data[i].prop2;
      const dataUsername = data[i].username;
      const dataTotScore = data[i].total_score;
      const dataDate = data[i].upl_date;

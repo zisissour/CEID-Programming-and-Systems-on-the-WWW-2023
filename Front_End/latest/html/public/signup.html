@@ -8,10 +8,10 @@
             <form class="signup" action="/register" method="post">
                 <input type="text" placeholder="Username" id="username" name="username" required><br> 
                 <input type="email" id="email" name="email" placeholder="Email" required><br>
-                <input type="password" id="password" name="password" title="At least 8 charactes long. At least one uppercase letter, number and symbol required!" placeholder="Password" pattern='^\S*(?=.{8,})(?=\S*[A-Z])(?=\S*\d)(?=\S*[!@&$%&?"])\S*$' required> <br>
+                <input type="password" id="password" name="password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$" required><br>
                 <input id="signup_button" type="submit" value="Sign Up"><br>
                 <a id="login_link" href="login.html">Already have an account? Login here!</a>
             </form>            
         </div>
     </body>
-</html>
+</html
