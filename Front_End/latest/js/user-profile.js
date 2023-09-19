@@ -64,7 +64,7 @@ function displayUserData(data)
     passwrdForm.setAttribute('action','/changePassword');
     passwrdForm.setAttribute('method', 'POST');
     const input3 = document.createElement('input');
-    input3.setAttribute('type', 'text');
+    input3.setAttribute('type', 'password');
     input3.setAttribute('placeholder', 'Κωδικός');
     input3.id = 'password';
     input3.setAttribute('name', 'password');

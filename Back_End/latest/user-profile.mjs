@@ -1,5 +1,6 @@
 import mysql from 'mysql';
 import {db} from "./database.mjs"
+import bcryptjs from 'bcryptjs';
 
 async function getUserData(UserId){
     
@@ -47,10 +48,10 @@ async function getRatingHistory(userId){
 
  }
 
- async function changePassword(userId,newPasswrd){
+ async function changePassword(userId,newPassword){
     try {
         const updateQuery =  'UPDATE user SET password = ? WHERE user_id = ?'
-        const query = mysql.format(updateQuery,[userId,newPasswrd]);
+        const query = mysql.format(updateQuery,[await bcryptjs.hash(newPassword, 10), userId]);
         await db.query(query);
 
      }catch

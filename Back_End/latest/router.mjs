@@ -177,22 +177,33 @@ router.get('/admin/getAvgDiscount', checkAuth, async function(req, res){
 
 router.post('/register',async (req, res) => {
     const { username, email, password } = req.body;
-    const success = await registerUser(username, email, password);
-    if(success)
-    {
+    let pattern= /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/
+
+    if (!pattern.test(password)){
         res.write(`<script>
-            alert('Successfully registered');
-            window.location.assign("/");
-        </script>`);
+                alert('Password does not match the requested format');
+                window.location.assign("/signup.html");
+            </script>`);
     }
-        
-    else
-    {
-        res.write(`<script>
-            alert('This username or email is already registered');
-            window.location.assign("/signup.html");
-        </script>`);  
-    }      
+    else{
+
+        const success = await registerUser(username, email, password);
+        if(success)
+        {
+            res.write(`<script>
+                alert('Successfully registered');
+                window.location.assign("/");
+            </script>`);
+        }
+            
+        else
+        {
+            res.write(`<script>
+                alert('This username or email is already registered');
+                window.location.assign("/signup.html");
+            </script>`);  
+        }      
+    }
 
 });
 
@@ -215,7 +226,7 @@ router.post('/login', async(req, res) => {
         
 });
 
-router.get('/logout', async (req, res) => {
+router.get('/logout', checkAuth, async (req, res) => {
     req.session.destroy();
     res.redirect('/login.html');
 });
@@ -227,42 +238,42 @@ router.post('/addSale', checkAuth, async function (req, res) {
     res.send(result);
 });
 
-router.post('/liked:id', async function(req, res)
+router.post('/liked:id',checkAuth, async function(req, res)
 {
     const saleid = req.params.id;
     res.send(await liked(req.session.username.user_id,saleid));
     
 }); 
 
-router.post('/disliked:id', async function(req, res)
+router.post('/disliked:id', checkAuth, async function(req, res)
 {
     const saleid = req.params.id;
     res.send(await disliked(req.session.username.user_id,saleid));
 
 }); 
 
-router.post('/instock:id', async function(req, res)
+router.post('/instock:id', checkAuth, async function(req, res)
 {
     const saleid = req.params.id;
     res.send(await inStock(saleid));
     
 });
 
-router.post('/outOfStock:id', async function(req, res)
+router.post('/outOfStock:id', checkAuth, async function(req, res)
 {
     const saleid = req.params.id;
     res.send(await outOfStock(saleid));
     
 });
 
-router.get('/getRatings', async function(req, res)
+router.get('/getRatings', checkAuth, async function(req, res)
 {
     res.setHeader('Cache-Control', 'no-store');
     res.send(await ratings(req.session.username.user_id)) 
     console.log(req.session.username.user_id);
 });
 
-router.get('/userProfile', async function(req, res)
+router.get('/userProfile', checkAuth, async function(req, res)
 {
     res.setHeader('Cache-Control', 'max-age=2678400');
    // res.sendFile(path.join(process.env.DIRNAME + '../../../Front_End/latest/html/user-profile.html'));
@@ -271,7 +282,7 @@ router.get('/userProfile', async function(req, res)
 }
 );
 
-router.get('/getUserData', async function(req, res)
+router.get('/getUserData', checkAuth, async function(req, res)
 {
 
     res.setHeader('Cache-Control', 'no-cache');
@@ -280,7 +291,7 @@ router.get('/getUserData', async function(req, res)
 }
 );
 
-router.post('/changeUsername', async (req, res) =>{
+router.post('/changeUsername', checkAuth,  async (req, res) =>{
     const newUsrn = req.body.username;
     console.log(newUsrn);
     const success =await changeUsername(req.session.username.user_id,newUsrn);
@@ -291,24 +302,34 @@ router.post('/changeUsername', async (req, res) =>{
     
 })
 
-router.post('/changePassword', async (req, res) =>{
+router.post('/changePassword', checkAuth, async (req, res) =>{
     const newPassword = req.body.password;
-    const success =await changePassword(req.session.username.user_id,newPassword);
-    res.write(`<script>
-            alert('Successfull password change');
-            window.location.assign("/profile");
-        </script>`);
-    
+    let pattern= /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/
+
+    if (!pattern.test(newPassword)){
+        res.write(`<script>
+                alert('Password does not match the requested format');
+                window.location.assign("/profile");
+            </script>`);
+    }
+
+    else{
+        const success =await changePassword(req.session.username.user_id,newPassword);
+        res.write(`<script>
+                alert('Successfull password change');
+                window.location.assign("/profile");
+            </script>`);
+    }    
 })
 
-router.get('/getSalesHistory', async function(req, res)
+router.get('/getSalesHistory', checkAuth, async function(req, res)
 {
     res.setHeader('Cache-Control', 'no-cache');
     res.send(await getSalesHistory(req.session.username.user_id));
 }
 );
 
-router.get('/getRatingHistory', async function(req, res)
+router.get('/getRatingHistory', checkAuth, async function(req, res)
 {
     res.setHeader('Cache-Control', 'no-store');
     res.send(await getRatingHistory(req.session.username.user_id));

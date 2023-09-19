@@ -4,6 +4,7 @@ import bcryptjs from 'bcryptjs';
 import path from 'path';
 
 async function registerUser(username, email, password) {
+
     let str = 'SELECT username, email FROM user WHERE username = ? OR email = ?';
     let query = mysql.format(str, [username, email]);
     let [user,_] = await db.query(query);
